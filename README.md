@@ -1,2 +1,2 @@
 # arch-config
-dasktop_config
+desktop_config
