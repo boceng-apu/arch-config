@@ -1,0 +1,115 @@
+// -*- mode: jsonc -*-
+{
+  "layer": "top", 
+  "position": "top", 
+  "height": 20, 
+  // "spacing": 5, 
+
+  ///////////////////////////////////////////////
+  "modules-left": [
+    "group/container"
+  ],
+  // "modules-center": ["hyprland/window"],
+  "modules-right": [
+    "clock", // 时钟
+    "group/main",
+    "tray" // 系统托盘，显示正在运行的程序图标    
+  ],
+
+//////////////////////组排版//////////////////////////
+"group/container":{
+    "orientation":"inherit",
+    "modules":[
+        "custom/logo",    
+        "hyprland/workspaces"
+      ]
+},
+
+"group/main":{
+    "orientation":"inherit",
+      // "drawer":{
+      //   "transition-duration":500,
+      //   "children-class":"not-power",
+      //   "transition-left-to-right":true
+      // },
+    "modules":[
+        "custom/powerprofile",// 自定义电源模式，一秒刷新显示
+        "pulseaudio",
+        "cpu",
+        "bluetooth" // 蓝牙模块
+      ]
+  },
+  
+//////////////////////模块设置//////////////////////////
+  // Modules configuration
+  "custom/logo":{
+    "format":"󰣇",
+    // "format":"󱢇"
+    "tooltip":false
+  },
+  "hyprland/workspaces": {
+    "active-only":false, // 是否只展示活动的工作区
+    // "move-to-monitor":true, // 是否在点击工作区是在当前的显示器中打开
+    "all-outputs": false, // 是否将全部工作区展示在所有显示器上
+    "show-special":true,  // 是否展示特殊工作区
+    "special-visible-only":false, // 此为真才会在打开特殊功能工作区时展示
+    "disable-scroll": true,
+    "warp-on-scroll": false,
+    "format": "{name}",
+    "persistent-workspaces":{ // 持久化工作区不存在也显示
+    "*":5
+  },
+  "on-scroll-up":"hyprctl dispatch workspace e+1",
+  "on-scroll-down":"hyprctl dispatch workspace e-1"
+  },
+  "cpu":{
+    "format":"{icon} {usage}%",
+    "interval":10,
+    "tooltip":false,
+    "format-icons":[""]
+  },
+  "tray": {
+    "icon-size": 20,
+    "spacing": 10
+  },
+  "bluetooth": {
+    "format":"󰂯 {status}"
+  },
+  "clock": {
+    "timezone": "Asia/Shanghai",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format-alt": "{:%Y-%m-%d}"
+  },
+  "custom/powerprofile": {
+    // "format-source": "{icon}",
+    "tooltip": true,
+    "exec":"~/.config/waybar/scripts/toggle-power-profile.sh get",
+    "return-type":"json",
+    "on-click":"~/.config/waybar/scripts/toggle-power-profile.sh toggle",
+    "interval":1 // 刷新时间一秒
+  //   "format-icons": {
+  //   "性能": "󰓅",
+  //   "省电": "󰾆",
+  //   "平衡": ""
+  // }
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "{format_source}",
+    "format-source":"󰕿",
+    "format-source-muted":"",
+    // "rotate":, // 旋转文字
+    "format-icons": {
+      "headphone": "",
+      "default": ["󰕿", "󰖀", "󰕾"]
+    },
+    "on-click": "pavucontrol"
+  },
+ "sway/scratchpad": {
+        "format": "{icon} {count}",
+        "show-empty": false,
+        "format-icons": ["", ""],
+        "tooltip": true,
+        "tooltip-format": "{app}: {title}"
+    }
+}
