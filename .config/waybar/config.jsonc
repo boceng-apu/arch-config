@@ -9,7 +9,7 @@
   "modules-left": [
     "group/container"
   ],
-  // "modules-center": ["hyprland/window"],
+  "modules-center": ["hyprland/window"],
   "modules-right": [
     "clock", // 时钟
     "group/main",
@@ -105,11 +105,7 @@
     },
     "on-click": "pavucontrol"
   },
- "sway/scratchpad": {
-        "format": "{icon} {count}",
-        "show-empty": false,
-        "format-icons": ["", ""],
-        "tooltip": true,
-        "tooltip-format": "{app}: {title}"
-    }
+  "hyprland/window": {
+    "format" : "{}"
+  }
 }
